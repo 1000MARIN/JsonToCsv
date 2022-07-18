@@ -1,10 +1,12 @@
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.nio.charset.Charset;
 
 public class JsonToCsv {
     public static void main(String[] args) {
-        String filePath = "C:/lcj/test.csv";
+
+        String filePath = "C:/lcj/test1.csv";
 
         File file = null;
         BufferedWriter bw = null;
@@ -12,7 +14,9 @@ public class JsonToCsv {
 
         try {
             file = new File(filePath);
-            bw = new BufferedWriter(new FileWriter(file));
+            
+            // csv 파일 읽어오기 한글깨짐 방지 인코딩
+            bw = new BufferedWriter(new FileWriter(file, Charset.forName("EUC-KR")));
 
             bw.write("번호,이름,지역");
             bw.write(newLine);
@@ -31,6 +35,5 @@ public class JsonToCsv {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 }
